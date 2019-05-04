@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+	
+		<property name="jdbcUrl" value="jdbc:mysql://www.sunlj.com/myblog?Unicode=true&amp;characterEncoding=utf8"/>
+		<property name="user" value="root"/>
+		<property name="password" value="thm211633"/>
+		<property name="minPoolSize">
+			<value>10</value>
+		</property>
+	</bean>
+	
+	<!-- 配置SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>com/myblog/domain/Article.hbm.xml</value>
+				<value>com/myblog/domain/User.hbm.xml</value>
+				<value>com/myblog/domain/Album.hbm.xml</value>
+			</list>
+		</property>
+		<!-- 配置Hibernate相关属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 声明Hibernate事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 声明事务拦截器 -->
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+			<!-- 设置事务管理策略 -->
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+				<prop key="saverr">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 声明代理创建 -->
+	<bean id="ProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 指定需生成业务代理的bean -->
+		<property name="beanNames">
+			<list>
+				<value>articleService</value>
+				<value>albumService</value>
+				<value>loginService</value>
+			</list>
+		</property>
+		<!-- 调用事务拦截器 -->
+		<property name="interceptorNames">
+			<list>
+			    <value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- action -->
+	<bean id="articleAction" class="com.myblog.action.ArticleAction">
+		<property name="articleService" ref="articleService"/>
+		<property name="article" ref="article"/>
+		<property name="user" ref="user"/>
+		<property name="albumAction" ref="albumAction"/>
+	</bean>
+	<bean id="albumAction" class="com.myblog.action.AlbumAction">
+		<property name="album" ref="album"/>
+		<property name="albumService" ref="albumService"/>
+	</bean>
+	
+	<bean id="loginAction" class="com.myblog.action.LoginAction">
+		<property name="user" ref="user"/>
+		<property name="loginService" ref="loginService"/>
+	</bean>
+	<!-- service -->
+	<bean id="articleService" class="com.myblog.service.ArticleService">
+		<property name="articleDao" ref="articleDao"/>
+		<property name="pageBean" ref="pageBean"/>
+	</bean>
+	<bean id="albumService" class="com.myblog.service.AlbumService">
+		<property name="pageBean" ref="pageBean"/>
+		<property name="albumDao" ref="albumDao"/>
+	</bean>
+	<bean id="loginService" class="com.myblog.service.LoginService">
+		<property name="loginDao" ref="loginDao"/>
+	</bean>
+	
+	<!-- dao -->
+	<bean id="articleDao" class="com.myblog.dao.ArticleDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="albumDao" class="com.myblog.dao.AlbumDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="loginDao" class="com.myblog.dao.LoginDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- domain -->
+	<bean id="pageBean" class="com.myblog.domain.PageBean">
+	
+	</bean>
+	<bean id="article" class="com.myblog.domain.Article">
+		
+	</bean>
+	<bean id="album" class="com.myblog.domain.Album">
+	
+	</bean>
+	
+	<bean id="user" class="com.myblog.domain.User">
+	
+	</bean>
+ 
+</beans>

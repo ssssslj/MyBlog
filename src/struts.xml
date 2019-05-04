@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="article" extends="struts-default">
+		<!-- <interceptors>
+			<interceptor name="myDefault" class="com.myblog.util.MyDefault"/>
+		</interceptors> -->
+		<global-results>
+			
+			<result name="error">/dark/admin/login.jsp</result>
+		</global-results>
+		<!-- <action name="publish_*" class="com.myblog.action.PublishAction" method="{1}">
+			<result name="success">/dark/admin/form.jsp</result>
+			
+			<interceptor-ref name="myDefault"></interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
+		</action> -->
+		
+		<action name="login" class="com.myblog.action.LoginAction">
+			<result name="login" type="redirectAction">
+				<!-- 重定向 -->
+				<param name="actionName">article_showDarkIndex</param>
+			</result>
+		</action>
+		
+		<action name="article_*" class="com.myblog.action.ArticleAction" method="{1}">
+			<result name="save">/dark/admin/form.jsp</result>
+			<result name="success">/index.jsp</result>
+			<result name="life">/list.jsp</result>
+			<result name="study">/list2.jsp</result>
+			<result name="dark_articles">/dark/admin/table-list.jsp</result>
+			<result name="delete" type="redirectAction">
+				<param name="actionName">article_showDarkArticleList?type=1</param>
+			</result>
+			<result name="dark_index">/dark/admin/index.jsp</result>
+			<result name="content">/info.jsp</result>
+			<result name="dark_content">/dark/admin/form.jsp</result>
+			<!-- <interceptor-ref name="myDefault"></interceptor-ref>
+			<interceptor-ref name="defaultStack"/> -->
+		</action>
+		
+		<action name="album_*" class="com.myblog.action.AlbumAction" method="{1}">
+			<result name="save">/dark/admin/form2.jsp</result>
+			
+			<result name="album">/share.jsp</result>
+			<result name="content">/infopic.jsp</result>
+			<!-- <interceptor-ref name="myDefault"></interceptor-ref>
+			<interceptor-ref name="defaultStack"/> -->
+		</action>
+	</package>
+</struts>

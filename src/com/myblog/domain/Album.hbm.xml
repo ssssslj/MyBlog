@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.myblog.domain.Album" table="album" >
+		<id name="alid" type="java.lang.Long">
+			<column name="alid"/>
+			<generator class="native"/>
+		</id>
+		<property name="img" type="java.lang.String"/>
+		<property name="imgs" type="java.lang.String"/>
+		<property name="title" column="title"/>
+		<property name="date"/>
+		<property name="digest" type="java.lang.String"/>
+		<property name="content" type="java.lang.String"/>
+	</class>
+</hibernate-mapping>
