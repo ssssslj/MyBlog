@@ -4,6 +4,9 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 	
 <struts>
+    <!-- 请求参数的编码方式-->
+ 
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
 	<package name="article" extends="struts-default">
 		<!-- <interceptors>
 			<interceptor name="myDefault" class="com.myblog.util.MyDefault"/>
@@ -19,14 +22,14 @@
 			<interceptor-ref name="defaultStack"/>
 		</action> -->
 		
-		<action name="login" class="com.myblog.action.LoginAction">
+		<!--<action name="login" class="com.myblog.action.LoginAction">
 			<result name="login" type="redirectAction">
-				<!-- 重定向 -->
+				 重定向 
 				<param name="actionName">article_showDarkIndex</param>
 			</result>
-		</action>
+		</action>-->
 		
-		<action name="article_*" class="com.myblog.action.ArticleAction" method="{1}">
+		<!-- <action name="article_*" class="com.myblog.action.ArticleAction" method="{1}">
 			<result name="save">/dark/admin/form.jsp</result>
 			<result name="success">/index.jsp</result>
 			<result name="life">/list.jsp</result>
@@ -38,17 +41,17 @@
 			<result name="dark_index">/dark/admin/index.jsp</result>
 			<result name="content">/info.jsp</result>
 			<result name="dark_content">/dark/admin/form.jsp</result>
-			<!-- <interceptor-ref name="myDefault"></interceptor-ref>
-			<interceptor-ref name="defaultStack"/> -->
-		</action>
+			<interceptor-ref name="myDefault"></interceptor-ref>
+			<interceptor-ref name="defaultStack"/> 
+		</action>-->
 		
-		<action name="album_*" class="com.myblog.action.AlbumAction" method="{1}">
+		<!-- <action name="album_*" class="com.myblog.action.AlbumAction" method="{1}">
 			<result name="save">/dark/admin/form2.jsp</result>
 			
 			<result name="album">/share.jsp</result>
 			<result name="content">/infopic.jsp</result>
-			<!-- <interceptor-ref name="myDefault"></interceptor-ref>
-			<interceptor-ref name="defaultStack"/> -->
-		</action>
+			<interceptor-ref name="myDefault"></interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
+		</action> -->
 	</package>
 </struts>

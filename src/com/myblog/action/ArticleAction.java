@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+
 import com.myblog.domain.Album;
 import com.myblog.domain.Article;
 import com.myblog.domain.PageBean;
@@ -12,8 +15,9 @@ import com.myblog.domain.User;
 import com.myblog.service.AlbumService;
 import com.myblog.service.ArticleService;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
-public class ArticleAction {
+public class ArticleAction extends ActionSupport{
 
 	private Article article;
 	private ArticleService articleService;
@@ -155,20 +159,20 @@ public class ArticleAction {
 		this.articleService = articleService;
 	}
 	//显示首页文章
+	@Action(value="article_showIndex",results= {@Result(name="success",location="/index.jsp")})
 	public String showIndex() {
 		
-			System.out.println("2222222");
 			this.indexlist = articleService.showIndex();
 			//显示点击排行文章
 			this.articleMap = articleService.showRank();
 			this.albumMap = albumAction.showIndex();
 			
-			System.out.println("????");
 			return "success";
-
 	}
 
 	//显示文章列表
+	@Action(value="article_showlist",results= {@Result(name="study",location="/list2.jsp"),
+											   @Result(name="life",location="/list.jsp")})
 	public String showlist() {
 		pageBean = articleService.findPageBean(currentPage, currentCount, type);
 		this.recommendMap = articleService.showRecommend();
@@ -182,6 +186,7 @@ public class ArticleAction {
 	}
 	
 	//显示文章内容
+	@Action(value="article_showContent",results= {@Result(name="content",location="/info.jsp")})
 	public String showContent() {
 		article = articleService.getContent(aid);
 		//获取推荐排行
@@ -192,6 +197,7 @@ public class ArticleAction {
 	}
 	
 	//发布文章
+	@Action(value="article_saveArticle",results= {@Result(name="save",location="/dark/admin/form.jsp")})
 	public String saveArticle() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 		article.setDate(df.format(new Date()));
@@ -235,18 +241,20 @@ public class ArticleAction {
 	}
 
 	//获取文章总数
+	@Action(value="article_showDarkIndex",results= {@Result(name="dark_index",location="/dark/admin/index.jsp")})
 	public String showDarkIndex() {
 		this.articleNum = articleService.showTotalCount();
 		return "dark_index";
 	}
 	
 	//获取文章列表
+	@Action(value="article_showDarkArticleList",results= {@Result(name="dark_articles",location="/dark/admin/table-list.jsp")})
 	public String showDarkArticleList() {
 		this.darkPageBean = articleService.findPageBean(currentPage, currentCount, type);
 		return "dark_articles";
 	}
 	//获取内容
-	
+	@Action(value="article_showDarkContent",results= {@Result(name="dark_content",location="/dark/admin/form.jsp")})
 	public String showDarkContent() {
 		article = articleService.getContent(aid);
 		
@@ -254,6 +262,7 @@ public class ArticleAction {
 	}
 	
 	//删除文章
+	@Action(value="article_deleteArticle",results= {@Result(name="delete",type="redirectAction", location="article_showDarkArticleList?type=1")})
 	public String deleteArticle() {
 		articleService.deleteArticle(aid);
 		return "delete";

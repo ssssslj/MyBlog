@@ -1,17 +1,36 @@
 package com.myblog.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="article")
 public class Article {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long aid;
+	
 	private String imgUrl;
+	
 	private String title;
+	
 	private String label;
+	
 	private String author;
+	
 	private String date;
+	
 	private String digest;
+	
 	private String content;
+	
 	private int type;
+	
 	private String recommand;
+	
     private int views;
 	
 	public int getViews() {

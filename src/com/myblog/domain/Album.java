@@ -2,14 +2,34 @@ package com.myblog.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="album")
 public class Album {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long alid;
+
 	private String img;
+
 	private String imgs;
+
 	private String title;
+
 	private String digest;
+
 	private String content;
+
 	private Date date;
+	
 	public Long getAlid() {
 		return alid;
 	}
