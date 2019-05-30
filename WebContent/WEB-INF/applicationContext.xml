@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
         http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
-	
+	<context:component-scan base-package="com.myblog" />
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
@@ -33,6 +33,7 @@
 				<value>com.myblog.domain.Article</value>
 				<value>com.myblog.domain.User</value>
 				<value>com.myblog.domain.Album</value>
+				<value>com.myblog.domain.Comment</value>
 			</list>
 		</property>
 		<!-- 配置Hibernate相关属性 -->
@@ -97,6 +98,10 @@
 		<property name="user" ref="user"/>
 		<property name="loginService" ref="loginService"/>
 	</bean>
+	<bean id="CommentAction" class="com.myblog.action.CommentAction">
+		<property name="comment" ref="comment"/>
+		<property name="commentService" ref="commentService"/>
+	</bean>
 	<!-- service -->
 	<bean id="articleService" class="com.myblog.service.ArticleService">
 		<property name="articleDao" ref="articleDao"/>
@@ -109,7 +114,9 @@
 	<bean id="loginService" class="com.myblog.service.LoginService">
 		<property name="loginDao" ref="loginDao"/>
 	</bean>
-	
+	<bean id="commentService" class="com.myblog.service.CommentService">
+		<property name="commentDao" ref="commentDao"/>
+	</bean>
 	<!-- dao -->
 	<bean id="articleDao" class="com.myblog.dao.ArticleDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
@@ -120,7 +127,9 @@
 	<bean id="loginDao" class="com.myblog.dao.LoginDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	
+	<bean id="commentDao" class="com.myblog.dao.CommentDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 	<!-- domain -->
 	<bean id="pageBean" class="com.myblog.domain.PageBean">
 	
@@ -134,6 +143,9 @@
 	
 	<bean id="user" class="com.myblog.domain.User">
 	
+	</bean>
+	<bean id="comment" class="com.myblog.domain.Comment">
+		
 	</bean>
  
 </beans>

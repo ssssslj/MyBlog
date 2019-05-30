@@ -105,8 +105,6 @@ public class Article {
 		this.digest = digest;
 	}
 	
-	
-	
 	public String getLabel() {
 		return label;
 	}
@@ -122,6 +120,4 @@ public class Article {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-
- 
 }

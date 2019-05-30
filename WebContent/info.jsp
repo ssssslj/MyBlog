@@ -158,11 +158,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
               <input name="nomember" type="hidden" id="nomember" value="1" checked="checked">
               <textarea name="saytext" rows="6" id="saytext"></textarea>
               <input name="imageField" type="submit" value="提交">
-              <input name="id" type="hidden" id="id" value="106">
-              <input name="classid" type="hidden" id="classid" value="77">
-              <input name="enews" type="hidden" id="enews" value="AddPl">
-              <input name="repid" type="hidden" id="repid" value="0">
-              <input type="hidden" name="ecmsfrom" value="/joke/talk/2018-07-23/106.html">
+              
             </div>
           </form>
         </div>
