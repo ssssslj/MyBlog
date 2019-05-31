@@ -72,6 +72,7 @@
 				<value>articleService</value>
 				<value>albumService</value>
 				<value>loginService</value>
+				<value>commentService</value>
 			</list>
 		</property>
 		<!-- 调用事务拦截器 -->

@@ -146,17 +146,20 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		  return true;
 		  }
 		  </script>
-          <form action="/e/pl/doaction.php" method="post" name="saypl" id="saypl" onsubmit="return CheckPl(document.saypl)">
+          <form action="saveComment" method="post" name="saypl" id="saypl" onsubmit="return CheckPl(document.saypl)">
             <div id="plpost">
               <p class="saying"><span><a href="/e/pl/?classid=77&amp;id=106">共有<script type="text/javascript" src="/e/public/ViewClick/?classid=77&amp;id=106&amp;down=2"></script>2条评论</a></span>来说两句吧...</p>
               <p class="yname"><span>用户名:</span>
-                <input name="username" type="text" class="inputText" id="username" value="" size="16">
+                <input name="comment.name" type="text" class="inputText" id="username" value="" size="16">
               </p>
               <p class="yzm"><span>验证码:</span>
                 <input name="key" type="text" class="inputText" size="16">
               </p>
-              <input name="nomember" type="hidden" id="nomember" value="1" checked="checked">
-              <textarea name="saytext" rows="6" id="saytext"></textarea>
+              <input name="comment.aid"  id="nomember" value="${article.aid}">
+              <input name="nomember" type="hidden" id="nomember" value="1">
+              <input name="nomember" type="hidden" id="nomember" value="1">
+              <input name="nomember" type="hidden" id="nomember" value="1">
+              <textarea name="comment.content" rows="6" id="saytext"></textarea>
               <input name="imageField" type="submit" value="提交">
               
             </div>

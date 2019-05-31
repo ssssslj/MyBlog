@@ -29,7 +29,7 @@ public class CommentAction {
 	}
 	@Action(value="saveComment",results= {@Result(name="save",location="/index.jsp")})
 	public String saveComment() {
-		
+		commentService.saveComment(comment);
 		return "save";
 	}
 	
