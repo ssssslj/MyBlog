@@ -1,5 +1,8 @@
 package com.myblog.dao;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,15 @@ public class CommentDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+	}
+
+	public List<Comment> showComment(int aid) {
+		// TODO Auto-generated method stub
+		Query query = this.sessionFactory.getCurrentSession().createQuery("from Comment where aid = ? order by acid desc");
+		query.setParameter(0, new Long(aid));
+		List<Comment> commentList = query.list();
+		return commentList;
 		
 	}
 	

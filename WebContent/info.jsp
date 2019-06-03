@@ -118,12 +118,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <h2>文章评论</h2>
         <div class="gbko"> 
           <script src="/e/pl/more/?classid=77&amp;id=106&amp;num=20"></script>
-          <div class="fb">
-            <ul>
-              <p class="fbtime"><span>2018-07-24 11:52:38</span>dancesmile</p>
-              <p class="fbinfo">这才是我要的朋友圈</p>
-            </ul>
-          </div>
+          <c:forEach var="comment" items="${commentList}">
+          	<div class="fb">
+            	<ul>
+              		<p class="fbtime"><span>${comment.date}</span>${comment.name}</p>
+              		<p class="fbinfo">${comment.content}</p>
+            	</ul>
+          	</div>
+          </c:forEach>
+          
           <div class="fb">
             <ul>
               <p class="fbtime"><span>2018-07-24 08:52:48</span> 卜野</p>
@@ -155,10 +158,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
               <p class="yzm"><span>验证码:</span>
                 <input name="key" type="text" class="inputText" size="16">
               </p>
-              <input name="comment.aid"  id="nomember" value="${article.aid}">
-              <input name="nomember" type="hidden" id="nomember" value="1">
-              <input name="nomember" type="hidden" id="nomember" value="1">
-              <input name="nomember" type="hidden" id="nomember" value="1">
+              <input name="comment.aid"  type="hidden" id="nomember" value="${article.aid}">
               <textarea name="comment.content" rows="6" id="saytext"></textarea>
               <input name="imageField" type="submit" value="提交">
               

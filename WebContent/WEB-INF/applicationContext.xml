@@ -89,6 +89,7 @@
 		<property name="article" ref="article"/>
 		<property name="user" ref="user"/>
 		<property name="albumAction" ref="albumAction"/>
+		<property name="commentAction" ref="commentAction"/>
 	</bean>
 	<bean id="albumAction" class="com.myblog.action.AlbumAction">
 		<property name="album" ref="album"/>
@@ -99,7 +100,7 @@
 		<property name="user" ref="user"/>
 		<property name="loginService" ref="loginService"/>
 	</bean>
-	<bean id="CommentAction" class="com.myblog.action.CommentAction">
+	<bean id="commentAction" class="com.myblog.action.CommentAction">
 		<property name="comment" ref="comment"/>
 		<property name="commentService" ref="commentService"/>
 	</bean>

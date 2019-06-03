@@ -1,6 +1,8 @@
 package com.myblog.action;
 
 
+import java.util.List;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
@@ -11,7 +13,16 @@ public class CommentAction {
 	
 	private Comment comment;
 	private CommentService commentService;
+	private Long aid;
 	
+	public Long getAid() {
+		return aid;
+	}
+
+	public void setAid(Long aid) {
+		this.aid = aid;
+	}
+
 	public CommentService getCommentService() {
 		return commentService;
 	}
@@ -33,4 +44,8 @@ public class CommentAction {
 		return "save";
 	}
 	
+	public List<Comment> showComment(int aid) {
+		List<Comment> commentList = commentService.showComment(aid);
+		return commentList;
+	}
 }

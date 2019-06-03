@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.myblog.domain.Album;
 import com.myblog.domain.Article;
+import com.myblog.domain.Comment;
 import com.myblog.domain.PageBean;
 import com.myblog.domain.User;
 import com.myblog.service.AlbumService;
@@ -24,6 +25,7 @@ public class ArticleAction extends ActionSupport{
 	private PageBean<Article> pageBean = null;
 	private int type;
 	private int aid;
+	private CommentAction commentAction;
 	//文章标题
 	private Map<Long, String> articleMap = null;
 	//相册图片
@@ -32,6 +34,23 @@ public class ArticleAction extends ActionSupport{
 	private AlbumAction albumAction;
 	private Map<Long, String> recommendMap = null;
 	
+
+	
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+
+	public CommentAction getCommentAction() {
+		return commentAction;
+	}
+
+	public void setCommentAction(CommentAction commentAction) {
+		this.commentAction = commentAction;
+	}
 
 	public User getUser() {
 		return user;
@@ -126,7 +145,7 @@ public class ArticleAction extends ActionSupport{
 
 	private List<Article> indexlist;
 	private List<Article> indexlist2;
-
+	private List<Comment> commentList;
 	public List<Article> getIndexlist2() {
 		return indexlist2;
 	}
@@ -189,6 +208,8 @@ public class ArticleAction extends ActionSupport{
 	@Action(value="article_showContent",results= {@Result(name="content",location="/info.jsp")})
 	public String showContent() {
 		article = articleService.getContent(aid);
+		//获取评论
+		this.commentList = commentAction.showComment(aid);
 		//获取推荐排行
 		this.recommendMap = articleService.showRecommend();
 		//获取浏览排行
