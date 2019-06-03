@@ -34,6 +34,7 @@
 				<value>com.myblog.domain.User</value>
 				<value>com.myblog.domain.Album</value>
 				<value>com.myblog.domain.Comment</value>
+				<value>com.myblog.domain.Goods</value>
 			</list>
 		</property>
 		<!-- 配置Hibernate相关属性 -->

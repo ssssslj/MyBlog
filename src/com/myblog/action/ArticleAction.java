@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.myblog.dao.GoodDao;
 import com.myblog.domain.Album;
 import com.myblog.domain.Article;
 import com.myblog.domain.Comment;
@@ -27,22 +28,25 @@ public class ArticleAction extends ActionSupport{
 	private Article article;
 	@Autowired
 	private ArticleService articleService;
-	private PageBean<Article> pageBean = null;
-	private int type;
-	private int aid;
 	@Autowired
 	private CommentAction commentAction;
-	//文章标题
-	private Map<Long, String> articleMap = null;
-	//相册图片
-	private Map<Long, String> albumMap = null;
 	@Autowired
 	private User user;
 	@Autowired
 	private AlbumAction albumAction;
-	private Map<Long, String> recommendMap = null;
+	@Autowired
+	private GoodDao goodDao;
 	
-
+	private PageBean<Article> pageBean = null;
+	private int type;
+	private int aid;
+	private int goods;
+	//文章标题
+	private Map<Long, String> articleMap = null;
+	//相册图片
+	private Map<Long, String> albumMap = null;
+	
+	private Map<Long, String> recommendMap = null;
 	
 	public List<Comment> getCommentList() {
 		return commentList;
@@ -186,6 +190,8 @@ public class ArticleAction extends ActionSupport{
 		this.recommendMap = articleService.showRecommend();
 		//获取浏览排行
 		this.articleMap = articleService.showRank();
+		
+		this.goods = goodDao.showGoods(aid);
 		return "content";
 	}
 	
