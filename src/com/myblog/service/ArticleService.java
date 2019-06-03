@@ -3,34 +3,21 @@ package com.myblog.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.myblog.dao.ArticleDao;
 import com.myblog.domain.Article;
 import com.myblog.domain.PageBean;
 import com.myblog.domain.Pager;
 import com.yueye.util.SpringBeanUtil;
 
+@Component
 public class ArticleService {
-
+	@Autowired
 	private ArticleDao articleDao;
+	@Autowired
 	private PageBean pageBean;
-	
-	public ArticleDao getArticleDao() {
-		return articleDao;
-	}
-
-	public void setArticleDao(ArticleDao articleDao) {
-		this.articleDao = articleDao;
-	}
-	
-	
-
-	public PageBean getPageBean() {
-		return pageBean;
-	}
-
-	public void setPageBean(PageBean pageBean) {
-		this.pageBean = pageBean;
-	}
 
 	public void saveArticle(Article article) {
 		

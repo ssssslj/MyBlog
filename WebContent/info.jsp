@@ -127,16 +127,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
           	</div>
           </c:forEach>
           
-          <div class="fb">
-            <ul>
-              <p class="fbtime"><span>2018-07-24 08:52:48</span> 卜野</p>
-              <p class="fbinfo"></p>
-              <div class="ecomment"><span class="ecommentauthor">网友 家蚂蚁 的原文：</span>
-                <p class="ecommenttext">坚持哟!看你每天都有写，请继续加油，再接再厉哦</p>
-              </div>
-            </ul>
-          </div>
-          
           <script>
 		  function CheckPl(obj)
 		  {

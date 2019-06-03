@@ -1,18 +1,15 @@
 package com.myblog.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.myblog.dao.LoginDao;
 import com.myblog.domain.User;
 
+@Component
 public class LoginService {
+	@Autowired
 	private LoginDao loginDao;
-
-	public LoginDao getLoginDao() {
-		return loginDao;
-	}
-
-	public void setLoginDao(LoginDao loginDao) {
-		this.loginDao = loginDao;
-	}
 
 	public String check(User user) {
 		// TODO Auto-generated method stub

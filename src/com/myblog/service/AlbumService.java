@@ -3,36 +3,26 @@ package com.myblog.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.myblog.dao.AlbumDao;
 import com.myblog.domain.Album;
 import com.myblog.domain.Article;
 import com.myblog.domain.PageBean;
 
+@Component
 public class AlbumService {
+	@Autowired
 	private AlbumDao albumDao;
-
+	@Autowired
 	private PageBean pageBean;
-	public AlbumDao getAlbumDao() {
-		return albumDao;
-	}
-
-	public void setAlbumDao(AlbumDao albumDao) {
-		this.albumDao = albumDao;
-	}
-
+	
 	public void saveAlbum(Album album) {
 		// TODO Auto-generated method stub
 		albumDao.saveAlbum(album);
 	}
 	
-	public PageBean getPageBean() {
-		return pageBean;
-	}
-
-	public void setPageBean(PageBean pageBean) {
-		this.pageBean = pageBean;
-	}
-
 	public PageBean findPageBean(int currentPage,int currentCount,int type) {
 		
 		pageBean.setCurrentPage(currentPage);

@@ -4,18 +4,27 @@ import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.myblog.domain.Album;
 import com.myblog.domain.PageBean;
 import com.myblog.service.AlbumService;
 import com.opensymphony.xwork2.ActionSupport;
 
+@Component
 public class AlbumAction extends ActionSupport{
+	@Autowired
 	private Album album;
+	@Autowired
 	private AlbumService albumService;
+
 	private PageBean<Album> pageBean = null;
+
 	private Map<Long, String> albumMap = null;
+
 	private int alid;
+	
 	int currentPage = 1;
 	int currentCount = 12;
 	public Album getAlbum() {
@@ -24,20 +33,15 @@ public class AlbumAction extends ActionSupport{
 	public void setAlbum(Album album) {
 		this.album = album;
 	}
-	public AlbumService getAlbumService() {
-		return albumService;
-	}
-	public void setAlbumService(AlbumService albumService) {
-		this.albumService = albumService;
+
+	public Map<Long, String> getAlbumMap() {
+		return albumMap;
 	}
 	public PageBean<Album> getPageBean() {
 		return pageBean;
 	}
 	public void setPageBean(PageBean<Album> pageBean) {
 		this.pageBean = pageBean;
-	}
-	public Map<Long, String> getAlbumMap() {
-		return albumMap;
 	}
 	public void setAlbumMap(Map<Long, String> albumMap) {
 		this.albumMap = albumMap;

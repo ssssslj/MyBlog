@@ -4,15 +4,14 @@ package com.myblog.dao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.myblog.domain.User;
-
+@Component
 public class LoginDao {
+	@Autowired
 	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	public String check(User user) {
 		// TODO Auto-generated method stub

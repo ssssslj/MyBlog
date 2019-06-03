@@ -83,71 +83,8 @@
 		</property>
 	</bean>
 	
-	<!-- action -->
-	<bean id="articleAction" class="com.myblog.action.ArticleAction">
-		<property name="articleService" ref="articleService"/>
-		<property name="article" ref="article"/>
-		<property name="user" ref="user"/>
-		<property name="albumAction" ref="albumAction"/>
-		<property name="commentAction" ref="commentAction"/>
-	</bean>
-	<bean id="albumAction" class="com.myblog.action.AlbumAction">
-		<property name="album" ref="album"/>
-		<property name="albumService" ref="albumService"/>
-	</bean>
 	
-	<bean id="loginAction" class="com.myblog.action.LoginAction">
-		<property name="user" ref="user"/>
-		<property name="loginService" ref="loginService"/>
-	</bean>
-	<bean id="commentAction" class="com.myblog.action.CommentAction">
-		<property name="comment" ref="comment"/>
-		<property name="commentService" ref="commentService"/>
-	</bean>
-	<!-- service -->
-	<bean id="articleService" class="com.myblog.service.ArticleService">
-		<property name="articleDao" ref="articleDao"/>
-		<property name="pageBean" ref="pageBean"/>
-	</bean>
-	<bean id="albumService" class="com.myblog.service.AlbumService">
-		<property name="pageBean" ref="pageBean"/>
-		<property name="albumDao" ref="albumDao"/>
-	</bean>
-	<bean id="loginService" class="com.myblog.service.LoginService">
-		<property name="loginDao" ref="loginDao"/>
-	</bean>
-	<bean id="commentService" class="com.myblog.service.CommentService">
-		<property name="commentDao" ref="commentDao"/>
-	</bean>
-	<!-- dao -->
-	<bean id="articleDao" class="com.myblog.dao.ArticleDao">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	<bean id="albumDao" class="com.myblog.dao.AlbumDao">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	<bean id="loginDao" class="com.myblog.dao.LoginDao">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	<bean id="commentDao" class="com.myblog.dao.CommentDao">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	<!-- domain -->
-	<bean id="pageBean" class="com.myblog.domain.PageBean">
+    <bean id="pageBean" class="com.myblog.domain.PageBean">
 	
 	</bean>
-	<bean id="article" class="com.myblog.domain.Article">
-		
-	</bean>
-	<bean id="album" class="com.myblog.domain.Album">
-	
-	</bean>
-	
-	<bean id="user" class="com.myblog.domain.User">
-	
-	</bean>
-	<bean id="comment" class="com.myblog.domain.Comment">
-		
-	</bean>
- 
 </beans>

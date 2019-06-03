@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.myblog.domain.Album;
 import com.myblog.domain.Article;
@@ -18,19 +20,25 @@ import com.myblog.service.ArticleService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+@Component
 public class ArticleAction extends ActionSupport{
-
+	
+	@Autowired
 	private Article article;
+	@Autowired
 	private ArticleService articleService;
 	private PageBean<Article> pageBean = null;
 	private int type;
 	private int aid;
+	@Autowired
 	private CommentAction commentAction;
 	//文章标题
 	private Map<Long, String> articleMap = null;
 	//相册图片
 	private Map<Long, String> albumMap = null;
+	@Autowired
 	private User user;
+	@Autowired
 	private AlbumAction albumAction;
 	private Map<Long, String> recommendMap = null;
 	
@@ -42,22 +50,6 @@ public class ArticleAction extends ActionSupport{
 
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
-	}
-
-	public CommentAction getCommentAction() {
-		return commentAction;
-	}
-
-	public void setCommentAction(CommentAction commentAction) {
-		this.commentAction = commentAction;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public int getAid() {
@@ -117,17 +109,6 @@ public class ArticleAction extends ActionSupport{
 		this.albumMap = albumMap;
 	}
 
-	public AlbumAction getAlbumAction() {
-		return albumAction;
-	}
-
-	public void setAlbumAction(AlbumAction albumAction) {
-		this.albumAction = albumAction;
-	}
-
-	
-
-
 	public Map<Long, String> getRecommendMap() {
 		return recommendMap;
 	}
@@ -135,9 +116,6 @@ public class ArticleAction extends ActionSupport{
 	public void setRecommendMap(Map<Long, String> recommendMap) {
 		this.recommendMap = recommendMap;
 	}
-
-
-
 
 	int currentPage = 1;
 
@@ -170,13 +148,6 @@ public class ArticleAction extends ActionSupport{
 		this.article = article;
 	}
 
-	public ArticleService getArticleService() {
-		return articleService;
-	}
-
-	public void setArticleService(ArticleService articleService) {
-		this.articleService = articleService;
-	}
 	//显示首页文章
 	@Action(value="article_showIndex",results= {@Result(name="success",location="/index.jsp")})
 	public String showIndex() {
@@ -208,6 +179,7 @@ public class ArticleAction extends ActionSupport{
 	@Action(value="article_showContent",results= {@Result(name="content",location="/info.jsp")})
 	public String showContent() {
 		article = articleService.getContent(aid);
+		System.out.println(article.getDate());
 		//获取评论
 		this.commentList = commentAction.showComment(aid);
 		//获取推荐排行
@@ -243,6 +215,7 @@ public class ArticleAction extends ActionSupport{
 	/*------------------------------------后台--------------------------------------*/
 	
 	private int articleNum;
+
 	private PageBean<Article> darkPageBean;
 	
 	public PageBean<Article> getDarkPageBean() {
